@@ -1,0 +1,12 @@
+services:
+  jenkins:
+    build: jenkins-controller
+    ports:
+      - "8080:8080"
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+      - CASC_JENKINS_CONFIG=/usr/local/configuration/jcac.yml
+  ssh-agent:
+    build: jenkins-agent
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false

@@ -1,0 +1,22 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+  authorizationStrategy: loggedInUsersCanDoAnything
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+        - gitHubApp:
+            appID: "896590"
+            description: "GitHub App"
+            id: "github-app"
+            privateKey: "${file:/usr/local/configuration/secrets/github-app.pem}"
+
+jobs:
+  - file: /usr/local/configuration/jobs/teste.groovy
