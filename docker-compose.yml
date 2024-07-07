@@ -7,9 +7,9 @@ services:
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
       - CASC_JENKINS_CONFIG=/usr/local/configuration/jcac.yml
-        #ssh-agent:
-        #build: jenkins-agent
-        #environment:
-        #- JAVA_OPTS=-Djenkins.install.runSetupWizard=false
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  ssh-agent:
+    build: jenkins-agent
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+        #volumes:
+        #- /var/run/docker.sock:/var/run/docker.sock
