@@ -11,10 +11,18 @@ credentials:
           description: "Credentials for Docker SSH Agent"
           id: "docker-agent"
           username: "jenkins"
-          passphrase: 
+          passphrase: "${SSH_DOCKER_PASSWORD}"
           privateKeySource:
             directEntry:
               privateKey: "${file:/usr/local/configuration/secrets/container_key}"
+      - basicSSHUserPrivateKey:
+          description: "Credentials for VM Agent"
+          id: "vm-agent"
+          username: "jenkins"
+          passphrase: "${SSH_VM_PASSWORD}"
+          privateKeySource:
+            directEntry:
+              privateKey: "${file:/usr/local/configuration/secrets/vm_key}"
 
 jenkins:
   securityRealm:
@@ -27,6 +35,7 @@ jenkins:
   numExecutors: 0
   nodes:
     - permanent:
+        labelString: "docker-agent"
         name: "docker-agent"
         remoteFS: "/home/jenkins/agent"
         launcher:
@@ -34,6 +43,7 @@ jenkins:
             credentialsId: docker-agent
             host: "docker-agent"
             port: 22
+            sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
 
 jobs:
   - file: /usr/local/configuration/jobs/teste.groovy

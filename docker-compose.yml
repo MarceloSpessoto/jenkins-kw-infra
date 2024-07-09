@@ -1,13 +1,13 @@
 services:
   jenkins:
-    build: jenkins-controller
+    build: jenkins
     ports:
       - "8090:8080"
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
       - CASC_JENKINS_CONFIG=/usr/local/configuration/jcac.yml
   docker-agent:
-    build: jenkins-agent
+    build: docker-agent
     ports:
       - "22:22"
     environment:

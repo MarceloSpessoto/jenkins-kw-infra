@@ -1,2 +1,5 @@
-ssh_keys/*
+keys/*
 **/secrets/*
+
+!keys/README.md
+!**/secrets/README.md
