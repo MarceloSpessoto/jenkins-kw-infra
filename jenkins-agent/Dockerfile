@@ -1,9 +1,8 @@
-FROM jenkins/jenkins:lts
+FROM jenkins/ssh-agent:latest
 USER root
 
 RUN apt update -y \
     && apt install -y binutils-dev libssl-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake build-essential python3 wget
-
 
 RUN mkdir kcov_build \
     && cd kcov_build \ 
@@ -23,7 +22,6 @@ RUN wget https://github.com/koalaman/shellcheck/releases/download/v0.10.0/shellc
 
 RUN curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s
 
-RUN apt install -y shunit2 bc sqlite3 bsdmainutils libxml-xpath-perl software-properties-common python3-launchpadlib \
-    python3-venv python3-pip
+RUN apt install -y shunit2 bc sqlite3 bsdmainutils libxml-xpath-perl software-properties-common python3-launchpadlib 
 
-USER kworkflow
+#USER jenkins

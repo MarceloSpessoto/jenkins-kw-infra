@@ -9,3 +9,7 @@ workflow-durable-task-step
 pipeline-stage-view
 pipeline-build-step
 pipeline-model-definition
+trilead-api
+ssh-credentials
+ssh-agent
+ssh-slaves
