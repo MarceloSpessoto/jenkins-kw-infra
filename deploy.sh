@@ -4,7 +4,7 @@ echo -ne "Insert SSH password for Docker agent: "
 read -s password
 export SSH_DOCKER_PASSWORD="${password}"
 
-echo -e "\nInsert SSH password for VM agent: "
+echo -ne "\nInsert SSH password for VM agent: "
 read -s password
 export SSH_VM_PASSWORD="${password}"
 

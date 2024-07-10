@@ -41,8 +41,8 @@ jenkins:
         launcher:
           ssh:
             credentialsId: docker-agent
-            host: "docker-agent"
-            port: 22
+            host: localhost
+            port: DOCKER_AGENT_PORT
             sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
 
 jobs:
