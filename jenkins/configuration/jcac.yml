@@ -44,6 +44,16 @@ jenkins:
             host: localhost
             port: DOCKER_AGENT_PORT
             sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
+    - permanent:
+        labelString: "vm-agent"
+        name: "vm-agent"
+        remoteFS: "/var/lib/jenkins"
+        launcher: 
+          ssh:
+            credentialsId: vm-agent
+            host: localhost
+            port: VM_AGENT_PORT
+            sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
 
 jobs:
   - file: /usr/local/configuration/jobs/teste.groovy

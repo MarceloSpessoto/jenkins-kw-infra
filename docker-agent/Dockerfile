@@ -4,7 +4,7 @@ USER root
 ARG DOCKER_AGENT_PORT
 
 RUN apt update -y \
-    && apt install -y binutils-dev libssl-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake build-essential python3 wget
+    && apt install -y binutils-dev libssl-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake build-essential python3 wget sudo
 
 RUN mkdir kcov_build \
     && cd kcov_build \ 
@@ -29,4 +29,4 @@ RUN apt install -y shunit2 bc sqlite3 bsdmainutils libxml-xpath-perl software-pr
 ENV DOCKER_AGENT_PORT=${DOCKER_AGENT_PORT}
 RUN sed -i "s/#Port 22/Port ${DOCKER_AGENT_PORT}/" /etc/ssh/sshd_config
 
-#USER jenkins
+RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers

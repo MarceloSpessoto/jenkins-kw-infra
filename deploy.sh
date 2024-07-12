@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -a 
+source .env
+set +a
+
 echo -ne "Insert SSH password for Docker agent: "
 read -s password
 export SSH_DOCKER_PASSWORD="${password}"
@@ -10,4 +14,6 @@ export SSH_VM_PASSWORD="${password}"
 
 export JENKINS_AGENT_SSH_PUBKEY=$(cat keys/container_key.pub)
 
-docker compose up
+docker compose up -d
+
+vagrant up --provision --provider=virtualbox

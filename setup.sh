@@ -54,6 +54,9 @@ sed -ie "s/DOCKER_AGENT_PORT=.*/DOCKER_AGENT_PORT=${port_docker}/" .env
 echo -ne "Insert Port for VM SSH Agent: "
 read port_vm
 sed -ie "s/VM_AGENT_PORT=.*/VM_AGENT_PORT=${port_vm}/" .env
+export VM_AGENT_PORT=${port_vm}
 
 # Start Jenkins server and Docker SSH agent by using Docker Compose
 docker-compose build
+
+#vagrant box add generic/ubuntu1804
