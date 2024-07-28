@@ -20,7 +20,6 @@ Vagrant.configure('2') do |config|
       mkdir /home/jenkins/.ssh
       echo #{vm_ssh_key} > /home/jenkins/.ssh/authorized_keys
       chown -R jenkins /home/jenkins/.ssh
-      echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     SHELL
   end
 end

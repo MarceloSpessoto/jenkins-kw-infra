@@ -8,14 +8,6 @@ credentials:
           id: "github-app"
           privateKey: "${file:/usr/local/configuration/secrets/github-app.pem}"
       - basicSSHUserPrivateKey:
-          description: "Credentials for Docker SSH Agent"
-          id: "docker-agent"
-          username: "jenkins"
-          passphrase: "${SSH_DOCKER_PASSWORD}"
-          privateKeySource:
-            directEntry:
-              privateKey: "${file:/usr/local/configuration/secrets/container_key}"
-      - basicSSHUserPrivateKey:
           description: "Credentials for VM Agent"
           id: "vm-agent"
           username: "jenkins"
@@ -33,17 +25,53 @@ jenkins:
           password: "admin"
   authorizationStrategy: "loggedInUsersCanDoAnything"
   numExecutors: 0
+  clouds:
+  - docker:
+      containerCap: 20
+      dockerApi:
+        connectTimeout: 60
+        dockerHost:
+          uri: "unix:///var/run/docker.sock"
+        readTimeout: 60
+      name: "docker-cloud"
+      templates:
+      - connector: "attach"
+        dockerTemplateBase:
+          cpuPeriod: 0
+          cpuQuota: 0
+          image: "marcelospe/kw-basic"
+        labelString: "basic-agent"
+        name: "Docker Agent"
+        pullStrategy: PULL_ALWAYS
+        pullTimeout: 300
+      - connector: "attach"
+        dockerTemplateBase:
+          cpuPeriod: 0
+          cpuQuota: 0
+          image: "marcelospe/kw-kcov"
+        labelString: "kcov-agent"
+        name: "Kcov agent"
+        pullStrategy: PULL_ALWAYS
+        pullTimeout: 300
+      - connector: "attach"
+        dockerTemplateBase:
+          cpuPeriod: 0
+          cpuQuota: 0
+          image: "marcelospe/kw-install-and-setup"
+        labelString: "install-and-setup-agent"
+        name: "Install and Setup Agent"
+        pullStrategy: PULL_ALWAYS
+        pullTimeout: 300
+      - connector: "attach"
+        dockerTemplateBase:
+          cpuPeriod: 0
+          cpuQuota: 0
+          image: "marcelospe/kw-shellcheck"
+        labelString: "shellcheck-agent"
+        name: "Shellcheck agent"
+        pullStrategy: PULL_ALWAYS
+        pullTimeout: 300
   nodes:
-    - permanent:
-        labelString: "docker-agent"
-        name: "docker-agent"
-        remoteFS: "/home/jenkins/agent"
-        launcher:
-          ssh:
-            credentialsId: docker-agent
-            host: localhost
-            port: DOCKER_AGENT_PORT
-            sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
     - permanent:
         labelString: "vm-agent"
         name: "vm-agent"
@@ -56,4 +84,4 @@ jenkins:
             sshHostKeyVerificationStrategy: "nonVerifyingKeyVerificationStrategy"
 
 jobs:
-  - file: /usr/local/configuration/jobs/teste.groovy
+  - file: /usr/local/configuration/jobs/jobs.groovy

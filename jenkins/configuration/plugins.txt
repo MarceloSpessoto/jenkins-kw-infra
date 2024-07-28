@@ -13,3 +13,4 @@ trilead-api
 ssh-credentials
 ssh-agent
 ssh-slaves
+docker-plugin
