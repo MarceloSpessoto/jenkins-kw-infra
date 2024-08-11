@@ -54,11 +54,15 @@ There is a part of the Jobs that are not in this repository. The scripts to be r
 Jenkinsfiles, are to be placed in the repository of your `kworkflow` fork. These are going to be read
 by the Jenkins server when a Pipeline is started.
 
+### After configuring the project
+
+The server can be deployed with `docker compose up -d`
+
 ## Actual status of the project
 
 It already deploys a fully functional Jenkins server with a Docker Cloud provider set.
 
-It can also automate the configuration of a full Virtual Machine agent using Vagrant. You can try it by running the 
-`setup.sh` and `deploy.sh` (EXPERIMENTAL).
-
 Further polishing is required to fix some unit test bugs and adjust the deployment of the Vagrant VM.
+
+The virtual machine agents is still being worked on, and will be developed alongside the `kworkflow`'s
+integration tests

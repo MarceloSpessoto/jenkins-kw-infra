@@ -3,12 +3,13 @@ services:
     build: 
       context: jenkins
       args: 
-        - DOCKER_AGENT_PORT=${DOCKER_AGENT_PORT}
         - VM_AGENT_PORT=${VM_AGENT_PORT}
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
       - CASC_JENKINS_CONFIG=/usr/local/configuration/jcac.yml
       - SSH_VM_PASSWORD=${SSH_VM_PASSWORD}
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
     network_mode: "host"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
