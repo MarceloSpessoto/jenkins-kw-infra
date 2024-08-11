@@ -21,8 +21,8 @@ jenkins:
     local:
       allowsSignup: false
       users:
-        - id: "admin"
-          password: "admin"
+        - id: "${USERNAME}"
+          password: "${PASSWORD}"
   authorizationStrategy: "loggedInUsersCanDoAnything"
   numExecutors: 0
   clouds:
@@ -51,15 +51,6 @@ jenkins:
           image: "marcelospe/kw-kcov"
         labelString: "kcov-agent"
         name: "Kcov agent"
-        pullStrategy: PULL_ALWAYS
-        pullTimeout: 300
-      - connector: "attach"
-        dockerTemplateBase:
-          cpuPeriod: 0
-          cpuQuota: 0
-          image: "marcelospe/kw-install-and-setup"
-        labelString: "install-and-setup-agent"
-        name: "Install and Setup Agent"
         pullStrategy: PULL_ALWAYS
         pullTimeout: 300
       - connector: "attach"

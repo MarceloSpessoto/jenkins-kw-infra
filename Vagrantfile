@@ -10,7 +10,7 @@ Vagrant.configure('2') do |config|
   # config.vm.network "public_network"
 
   config.vm.provision 'shell' do |s|
-    vm_ssh_key = File.readlines('keys/vm_key.pub').first.strip
+    vm_ssh_key = File.readlines('vm_key.pub').first.strip
     s.inline = <<-SHELL
       apt update -y
       apt install -y default-jre

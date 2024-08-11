@@ -8,7 +8,6 @@ services:
     environment:
       - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
       - CASC_JENKINS_CONFIG=/usr/local/configuration/jcac.yml
-      - SSH_DOCKER_PASSWORD=${SSH_DOCKER_PASSWORD}
       - SSH_VM_PASSWORD=${SSH_VM_PASSWORD}
     network_mode: "host"
     volumes:
